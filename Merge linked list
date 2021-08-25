@@ -1,0 +1,60 @@
+package linkedlist;
+
+class Node {
+	  int val;
+	  Node next;
+	  Node(int val) {
+	    this.val = val;
+	  }
+	}
+
+	class MergeLinkedList {
+
+	  private static Node LinkedLists(Node l1, Node l2) {
+	    Node result = null;
+	    Node head = null;
+	    
+	    while(l1 != null || l2 != null) {
+	      int minVal;
+	      if (l1 == null) {
+	        minVal = l2.val;
+	        l2 = l2.next;
+	      } else if (l2 == null) {
+	        minVal = l1.val;
+	        l1 = l1.next;
+	      } else if(l1.val <= l2.val) {
+	        minVal = l1.val;
+	        l1 = l1.next;
+	      } else {
+	        minVal = l2.val;
+	        l2 = l2.next;
+	      }
+
+	      if(result == null) {
+	        result = head = new Node(minVal);
+	      } else {
+	        result.next = new Node(minVal);
+	        result = result.next;
+	      }
+	    }
+
+	    return head;
+	  }
+
+	  public static void main(String[] args) {
+	    Node l1 = new Node(1);
+	    l1.next = new Node(2);
+	    l1.next.next = new Node(4);
+
+	    Node l2 = new Node(1);
+	    l2.next = new Node(3);
+	    l2.next.next = new Node(4);
+
+	    Node mergedList = LinkedLists(l1, l2);
+	    while(mergedList != null) {
+	      System.out.print(mergedList.val + " ");
+	      mergedList = mergedList.next;
+	    }
+	    System.out.println();
+	  }
+	}
